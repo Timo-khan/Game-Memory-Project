@@ -28,6 +28,9 @@ function flipCard() {
             chosenCards.push(cardId);
             chosenCardsIds.push(cardId);
             this.setAttribute("src", "images/" + cardsList[cardId]);
+            if (chosenCards.length === 2) {
+                setTimeout(checkForMatch, 500);
+            }
         }
     }
 }
