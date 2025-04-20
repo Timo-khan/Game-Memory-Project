@@ -36,4 +36,11 @@ function flipCard() {
     }
 }
 
+function checkForMatch() {
+    attempts++;
+    let cards = document.querySelectorAll("img");
+    let firstCard = chosenCardsIds[0]; 
+    let secondCard = chosenCardsIds[1];
+}
+
 initiateBoard();
