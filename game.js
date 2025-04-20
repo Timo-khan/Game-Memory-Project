@@ -47,8 +47,8 @@ function checkForMatch() {
 
     if (cardsList[chosenCards[0]] === cardsList[chosenCards[1]]) {
         foundCards++;
-        cards[firstCard].setAttribute;
-        cards[secondCard].setAttribute;
+        cards[firstCard].removeEventListener("click", flipCard);
+        cards[secondCard].removeEventListener("click", flipCard);
     } else {
         cards[firstCard].setAttribute("src", "images/card-backside.jpg");
         cards[secondCard].setAttribute("src", "images/card-backside.jpg");
