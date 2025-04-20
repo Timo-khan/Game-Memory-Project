@@ -6,8 +6,8 @@ cardsList.sort(() => 0.5 - Math.random());
 
 const grid = document.querySelector(".gameGrid");
 const cardsInGame = 6;
-attempts = 0;
-foundCards = 0;
+let attempts = 0;
+let foundCards = 0;
 
 let chosenCards = [];
 let chosenCardsIds = [];
@@ -29,6 +29,9 @@ function flipCard() {
             chosenCards.push(cardId);
             chosenCardsIds.push(cardId);
             this.setAttribute("src", "images/" + cardsList[cardId]);
+            let cardFlipCount = 0;
+            cardFlipCount++;
+            console.log("Card flipped. Total flips:", cardFlipCount);
             if (chosenCards.length === 2) {
                 setTimeout(checkForMatch, 500);
             }
@@ -56,6 +59,20 @@ function checkForMatch() {
 
     if (foundCards === cardsInGame) {
         alert("You matched them all! 🎉");
+    }
+
+    const resetButton = document.querySelector("#button");  
+    resetButton.addEventListener("click", resetGame);
+
+    function resetGame() {
+        grid.innerHTML = '';
+
+        attempts = 0;
+        foundCards = 0;
+        chosenCards = [];
+        chosenCardsIds = [];
+        cardsList.sort(() => 0.5 - Math.random());
+        initiateBoard();
     }
 }
 
