@@ -14,6 +14,9 @@ let chosenCardsIds = [];
 
 function initiateBoard() {
     for (let i = 0; i < cardsList.length; i++) {
-        
+        card.setAttribute("src", "images/card-backside.jpg");
+        card.setAttribute("data-id", i);
+        card.addEventListener("click", flipCard);
+        grid.appendChild(card);
     }
 }
