@@ -20,3 +20,14 @@ function initiateBoard() {
         grid.appendChild(card);
     }
 }
+
+function flipCard() {
+    if (chosenCards.length != 2) {
+        let cardId = this.getAttribute("data-id");
+        if (this.getAttribute("src") !== "images/") {
+            chosenCards.push(cardId);
+            chosenCardsIds.push(cardId);
+            this.setAttribute("src", "images/" + cardsList[cardId]);
+        }
+    }
+}
