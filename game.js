@@ -41,6 +41,22 @@ function checkForMatch() {
     let cards = document.querySelectorAll("img");
     let firstCard = chosenCardsIds[0]; 
     let secondCard = chosenCardsIds[1];
+
+    if (cardsList[chosenCards[0]] === cardsList[chosenCards[1]]) {
+        foundCards++;
+        cards[firstCard].setAttribute;
+        cards[secondCard].setAttribute;
+    } else {
+        cards[firstCard].setAttribute("src", "images/card-backside.jpg");
+        cards[secondCard].setAttribute("src", "images/card-backside.jpg");
+    }
+
+    chosenCards = [];
+    chosenCardsIds = [];
+
+    if (foundCards === cardsInGame) {
+        alert("You matched them all! 🎉");
+    }
 }
 
 initiateBoard();
