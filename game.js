@@ -68,6 +68,7 @@ function checkForMatch() {
     if (foundCards === cardsInGame) {
         alert("You matched them all! 🎉");
     }
+}
 
     fetchCards()
     .then((cards) => {
@@ -78,19 +79,21 @@ function checkForMatch() {
         console.error("Couldn't load cards:", error);
     });
 
-    const resetButton = document.querySelector("#button");  
-    resetButton.addEventListener("click", resetGame);
-
     function resetGame() {
         grid.innerHTML = '';
-
         attempts = 0;
         foundCards = 0;
         chosenCards = [];
         chosenCardsIds = [];
-        cardsList.sort(() => 0.5 - Math.random());
-        initiateBoard();
+    
+        fetchCards()
+            .then((cards) => {
+                cardsList = cards;
+                initiateBoard();
+            })
+            .catch((error) => {
+                console.error("Couldn't reset game:", error);
+            });
     }
-}
 
-initiateBoard();
+document.getElementById("button").addEventListener("click", resetGame);
