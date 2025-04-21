@@ -1,9 +1,16 @@
 function fetchCards() {
     return new Promise((resolve) => {
         setTimeout (() => {
-            
-        })
-    })
+            const images = [
+                'bird2.jpg', 'bird2.jpg', 'cat.jpg', 'cat.jpg',
+                'parrot.jpg', 'parrot.jpg', 'ostrich.avif', 'ostrich.avif',
+                'squirrel.jpg', 'squirrel.jpg', 'turtle.jpg', 'turtle.jpg'
+            ];
+
+            const randomized = images.sort(() => 0.5 - Math.random());
+            resolve(randomized);
+        }, 500)
+    });
 }
 
 const grid = document.querySelector(".gameGrid");
