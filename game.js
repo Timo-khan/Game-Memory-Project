@@ -50,16 +50,15 @@ function flipCard() {
 function checkForMatch() {
     attempts++;
     let cards = document.querySelectorAll("img");
-    let firstCard = chosenCardsIds[0]; 
-    let secondCard = chosenCardsIds[1];
+    const [firstId, secondId] = chosenCardsIds;
 
-    if (cardsList[chosenCards[0]] === cardsList[chosenCards[1]]) {
+    if (chosenCards[0] === chosenCards[1]) {
         foundCards++;
-        cards[firstCard].removeEventListener("click", flipCard);
-        cards[secondCard].removeEventListener("click", flipCard);
+        cards[firstId].removeEventListener("click", flipCard);
+        cards[secondId].removeEventListener("click", flipCard);
     } else {
-        cards[firstCard].setAttribute("src", "images/card-backside.jpg");
-        cards[secondCard].setAttribute("src", "images/card-backside.jpg");
+        cards[firstId].setAttribute("src", "images/card-backside.jpg");
+        cards[secondId].setAttribute("src", "images/card-backside.jpg");
     }
 
     chosenCards = [];
