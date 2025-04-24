@@ -1,11 +1,21 @@
-const cardsList = [
-    'bird2.jpg', 'bird2.jpg', 'cat.jpg', 'cat.jpg', 'parrot.jpg', 'parrot.jpg',
-    'ostrich.avif', 'ostrich.avif', 'squirrel.jpg', 'squirrel.jpg', 'turtle.jpg', 'turtle.jpg'  
-];
-cardsList.sort(() => 0.5 - Math.random());
+function fetchCards() {
+    return new Promise((resolve) => {
+        setTimeout (() => {
+            const images = [
+                'bird2.jpg', 'bird2.jpg', 'cat.jpg', 'cat.jpg',
+                'parrot.jpg', 'parrot.jpg', 'ostrich.avif', 'ostrich.avif',
+                'squirrel.jpg', 'squirrel.jpg', 'turtle.jpg', 'turtle.jpg'
+            ];
+
+            const randomized = images.sort(() => 0.5 - Math.random());
+            resolve(randomized);
+        }, 500)
+    });
+}
 
 const grid = document.querySelector(".gameGrid");
 const cardsInGame = 6;
+let cardsList = [];
 let attempts = 0;
 let foundCards = 0;
 
@@ -23,18 +33,16 @@ function initiateBoard() {
 }
 
 function flipCard() {
-    if (chosenCards.length != 2) {
-        let cardId = this.getAttribute("data-id");
-        if (this.getAttribute("src") !== "images/") {
-            chosenCards.push(cardId);
-            chosenCardsIds.push(cardId);
-            this.setAttribute("src", "images/" + cardsList[cardId]);
-            let cardFlipCount = 0;
-            cardFlipCount++;
-            console.log("Card flipped. Total flips:", cardFlipCount);
-            if (chosenCards.length === 2) {
-                setTimeout(checkForMatch, 500);
-            }
+    if (chosenCards.length === 2) return;
+
+    let cardId = this.getAttribute("data-id");
+    if (!chosenCardsIds.includes(cardId)) {
+        chosenCards.push(cardsList[cardId]);
+        chosenCardsIds.push(cardId);
+        this.setAttribute("src", "images/" + cardsList[cardId]);
+
+        if (chosenCards.length === 2) {
+            setTimeout(checkForMatch, 500);
         }
     }
 }
@@ -42,16 +50,15 @@ function flipCard() {
 function checkForMatch() {
     attempts++;
     let cards = document.querySelectorAll("img");
-    let firstCard = chosenCardsIds[0]; 
-    let secondCard = chosenCardsIds[1];
+    const [firstId, secondId] = chosenCardsIds;
 
-    if (cardsList[chosenCards[0]] === cardsList[chosenCards[1]]) {
+    if (chosenCards[0] === chosenCards[1]) {
         foundCards++;
-        cards[firstCard].setAttribute;
-        cards[secondCard].setAttribute;
+        cards[firstId].removeEventListener("click", flipCard);
+        cards[secondId].removeEventListener("click", flipCard);
     } else {
-        cards[firstCard].setAttribute("src", "images/card-backside.jpg");
-        cards[secondCard].setAttribute("src", "images/card-backside.jpg");
+        cards[firstId].setAttribute("src", "images/card-backside.jpg");
+        cards[secondId].setAttribute("src", "images/card-backside.jpg");
     }
 
     chosenCards = [];
@@ -60,20 +67,32 @@ function checkForMatch() {
     if (foundCards === cardsInGame) {
         alert("You matched them all! 🎉");
     }
+}
 
-    const resetButton = document.querySelector("#button");  
-    resetButton.addEventListener("click", resetGame);
+    fetchCards()
+    .then((cards) => {
+        cardsList = cards;
+        initiateBoard();
+    })
+    .catch((error) => {
+        console.error("Couldn't load cards:", error);
+    });
 
     function resetGame() {
         grid.innerHTML = '';
-
         attempts = 0;
         foundCards = 0;
         chosenCards = [];
         chosenCardsIds = [];
-        cardsList.sort(() => 0.5 - Math.random());
-        initiateBoard();
+    
+        fetchCards()
+            .then((cards) => {
+                cardsList = cards;
+                initiateBoard();
+            })
+            .catch((error) => {
+                console.error("Couldn't reset game:", error);
+            });
     }
-}
 
-initiateBoard();
+document.getElementById("button").addEventListener("click", resetGame);
