@@ -22,6 +22,10 @@ let foundCards = 0;
 let chosenCards = [];
 let chosenCardsIds = [];
 
+let startTime = null;
+let timerInterval = null;
+const timerDisplay = document.getElementById("timer");
+
 function initiateBoard() {
     for (let i = 0; i < cardsList.length; i++) {
         let card = document.createElement("img");
@@ -32,14 +36,33 @@ function initiateBoard() {
     }
 }
 
+function startTimer() {
+    startTime = Date.now();
+    timerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        timerDisplay.textContent = `Time: ${elapsed}s`;
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
 function flipCard() {
     if (chosenCards.length === 2) return;
+
+    if (!startTime) {
+        startTimer();
+    }
 
     let cardId = this.getAttribute("data-id");
     if (!chosenCardsIds.includes(cardId)) {
         chosenCards.push(cardsList[cardId]);
         chosenCardsIds.push(cardId);
         this.setAttribute("src", "images/" + cardsList[cardId]);
+        let cardFlipCount = 0;
+        cardFlipCount++;
+        console.log("Card flipped. Total flips:", cardFlipCount);
 
         if (chosenCards.length === 2) {
             setTimeout(checkForMatch, 500);
@@ -85,6 +108,9 @@ function checkForMatch() {
         foundCards = 0;
         chosenCards = [];
         chosenCardsIds = [];
+        startTime = null;
+        timerDisplay.textContent = "Time: 0s";
+        stopTimer();
     
         try {
             const cards = await fetchCards();
