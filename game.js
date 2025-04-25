@@ -1,4 +1,4 @@
-function fetchCards() {
+async function fetchCards() {
     return new Promise((resolve) => {
         setTimeout (() => {
             const images = [
