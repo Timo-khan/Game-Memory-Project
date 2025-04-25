@@ -69,14 +69,15 @@ function checkForMatch() {
     }
 }
 
-    fetchCards()
-    .then((cards) => {
-        cardsList = cards;
-        initiateBoard();
-    })
-    .catch((error) => {
-        console.error("Couldn't load cards:", error);
-    });
+    (async function() {
+        try {
+            const cards = await fetchCards();
+            cardsList = cards;
+            initiateBoard();
+        } catch (error) {
+        console.error("couldn't load cards:", error);
+        }
+    })();
 
     function resetGame() {
         grid.innerHTML = '';
