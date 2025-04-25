@@ -88,7 +88,11 @@ function checkForMatch() {
     chosenCardsIds = [];
 
     if (foundCards === cardsInGame) {
-        alert("You matched them all! 🎉");
+        stopTimer();
+        setTimeout(() => {
+            alert("You matched them all! 🎉");
+            resetGame(); 
+        }, 500); 
     }
 }
 
