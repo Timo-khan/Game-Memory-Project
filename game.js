@@ -79,21 +79,20 @@ function checkForMatch() {
         }
     })();
 
-    function resetGame() {
+    async function resetGame() {
         grid.innerHTML = '';
         attempts = 0;
         foundCards = 0;
         chosenCards = [];
         chosenCardsIds = [];
     
-        fetchCards()
-            .then((cards) => {
-                cardsList = cards;
-                initiateBoard();
-            })
-            .catch((error) => {
-                console.error("Couldn't reset game:", error);
-            });
+        try {
+            const cards = await fetchCards();
+            cardsList = cards;
+            initiateBoard();
+        } catch (error) {
+            console.error("Couldn't reset game:", error);
+        }
     }
 
 document.getElementById("button").addEventListener("click", resetGame);
