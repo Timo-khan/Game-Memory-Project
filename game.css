@@ -7,6 +7,12 @@ body{
     background-color: rgb(37, 13, 4);
 }
 
+#timer {
+    color: rgb(255, 0, 0);
+    display: flex;
+    justify-content: flex-end;
+}
+
 .gameGrid{
     display: flex;
     flex-wrap: wrap;
