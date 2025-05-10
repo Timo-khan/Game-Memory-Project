@@ -13,6 +13,12 @@ body{
     justify-content: flex-end;
 }
 
+#flip-counter {
+    color: rgb(255, 0, 0);
+    display: flex;
+    justify-content: flex-end;
+}
+
 .gameGrid{
     display: flex;
     flex-wrap: wrap;
