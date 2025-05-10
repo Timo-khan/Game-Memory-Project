@@ -14,6 +14,7 @@ async function fetchCards() {
 }
 
 const grid = document.querySelector(".gameGrid");
+const flipCounterDisplay = document.getElementById("flip-counter");
 const cardsInGame = 6;
 let cardsList = [];
 let attempts = 0;
@@ -51,6 +52,8 @@ function stopTimer() {
 }
 
 function flipCard() {
+    cardFlipCount++;
+    flipCounterDisplay.textContent = `Flips: ${cardFlipCount}`;
     if (chosenCards.length === 2) return;
 
     if (!startTime) {
@@ -120,6 +123,8 @@ function checkForMatch() {
 
     async function resetGame() {
         grid.innerHTML = '';
+        cardFlipCount = 0;
+        flipCounterDisplay.textContent = "Flips: 0";
         attempts = 0;
         foundCards = 0;
         chosenCards = [];
