@@ -22,6 +22,7 @@ let cardFlipCount = 0;
 
 let chosenCards = [];
 let chosenCardsIds = [];
+let isChecking = false;
 
 let startTime = null;
 let timerInterval = null;
@@ -56,7 +57,7 @@ function flipCard() {
         startTimer();
     }
 
-    let cardId = this.getAttribute("data-id");
+    let cardId = parseInt(this.getAttribute("data-id"));
     if (!chosenCardsIds.includes(cardId)) {
         chosenCards.push(cardsList[cardId]);
         chosenCardsIds.push(cardId);
@@ -65,23 +66,34 @@ function flipCard() {
         console.log("Card flipped. Total flips:", cardFlipCount);
 
         if (chosenCards.length === 2) {
-            setTimeout(checkForMatch, 500);
+            isChecking = true;
+            setTimeout(() => {
+                checkForMatch();
+                isChecking = false;
+            }, 600);
         } 
     }
 }
 
 function checkForMatch() {
     attempts++;
-    let cards = document.querySelectorAll(".gameGrid img");
-    const [firstId, secondId] = chosenCardsIds.map(id => parseInt(id));
+    const firstId = chosenCardsIds[0];
+    const secondId = chosenCardsIds[1];
+    const firstCard = document.querySelector(`img[data-id='${firstId}']`);
+    const secondCard = document.querySelector(`img[data-id='${secondId}']`);
+    
 
     if (chosenCards[0] === chosenCards[1]) {
         foundCards++;
-        cards[firstId].remove();
-        cards[secondId].remove();
+        setTimeout(() => {
+        firstCard.remove();
+        secondCard.remove();
+        }, 300);
     } else {
-        cards[firstId].setAttribute("src", "images/card-backside.jpg");
-        cards[secondId].setAttribute("src", "images/card-backside.jpg");
+        setTimeout(() => {
+            if (firstCard) firstCard.setAttribute("src", "images/card-backside.jpg");
+            if (secondCard) secondCard.setAttribute("src", "images/card-backside.jpg");
+        }, 300);
     }
 
     chosenCards = [];
