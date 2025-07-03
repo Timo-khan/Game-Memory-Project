@@ -64,21 +64,21 @@ function stopTimer() {
 }
 
 function flipCard() {
-    cardFlipCount++;
-    flipCounterDisplay.textContent = `Flips: ${cardFlipCount}`;
-    if (chosenCards.length === 2) return;
+    if (isChecking || this.classList.contains("flipped") || chosenCards.length === 2) return;
+
+    const cardId = parseInt(this.getAttribute("data-id"));
+
+    if (!chosenCardsIds.includes(cardId)) {
+        this.classList.add("flipped");
+
+        chosenCards.push(cardsList[cardId]);
+        chosenCardsIds.push(cardId);
+        cardFlipCount++;
+        flipCounterDisplay.textContent = `Flips: ${cardFlipCount}`;
 
     if (!startTime) {
         startTimer();
     }
-
-    let cardId = parseInt(this.getAttribute("data-id"));
-    if (!chosenCardsIds.includes(cardId)) {
-        chosenCards.push(cardsList[cardId]);
-        chosenCardsIds.push(cardId);
-        this.setAttribute("src", "images/" + cardsList[cardId]);
-        cardFlipCount++;
-        console.log("Card flipped. Total flips:", cardFlipCount);
 
         if (chosenCards.length === 2) {
             isChecking = true;
