@@ -91,23 +91,23 @@ function flipCard() {
 }
 
 function checkForMatch() {
-    attempts++;
     const firstId = chosenCardsIds[0];
     const secondId = chosenCardsIds[1];
-    const firstCard = document.querySelector(`img[data-id='${firstId}']`);
-    const secondCard = document.querySelector(`img[data-id='${secondId}']`);
+
+    const firstCard = document.querySelector(`.memory-card[data-id='${firstId}']`);
+    const secondCard = document.querySelector(`.memory-card[data-id='${secondId}']`);
     
 
     if (chosenCards[0] === chosenCards[1]) {
         foundCards++;
         setTimeout(() => {
-        firstCard.remove();
-        secondCard.remove();
+        firstCard.style.visibility = "hidden";
+            secondCard.style.visibility = "hidden";
         }, 300);
     } else {
         setTimeout(() => {
-            if (firstCard) firstCard.setAttribute("src", "images/card-backside.jpg");
-            if (secondCard) secondCard.setAttribute("src", "images/card-backside.jpg");
+            firstCard.classList.remove("flipped");
+            secondCard.classList.remove("flipped");
         }, 300);
     }
 
@@ -122,6 +122,7 @@ function checkForMatch() {
         }, 500); 
     }
 }
+
 
     (async function() {
         try {
