@@ -58,7 +58,21 @@ body{
     transition: transform 0.6s;
 }
 
+.front-face {
+    transform: rotateY(180deg);
+}
 
+.memory-card.flipped .front-face {
+    transform: rotateY(0deg);
+}
+
+.memory-card.flipped .back-face {
+    transform: rotateY(180deg);
+}
+
+.memory-card .back-face {
+    transform: rotateY(0deg);
+}
 
 .game-text {
     background: radial-gradient(
