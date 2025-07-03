@@ -83,22 +83,93 @@ body {
 }
 
 .game-text {
-	background: radial-gradient(
-		circle,
-		rgb(0, 13, 255) 0%,
-		rgba(240, 237, 23, 1) 100%
-	);
-	border-radius: 0.5rem;
-	border: 10%;
-	border-color: blue;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-family: "Luckiest Guy", cursive;
-	margin-bottom: 2%;
-	padding-bottom: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Luckiest Guy", cursive;
+    margin-bottom: 2%;
 }
+
+.game-text-cont {
+    background-image: linear-gradient(#212121, #212121),
+		linear-gradient(
+			137.48deg,
+			#ffdb3b 10%,
+			#fe53bb 45%,
+			#8f51ea 67%,
+			#0044ff 87%
+		);
+	
+    backdrop-filter: blur(1rem);
+	border-radius: 0.5rem;
+	animation: gradient_301 5s ease infinite;
+	border: double 4px transparent;
+    cursor: pointer;
+	height: 100%;
+    width: 60rem;
+}
+
+.m-stars {
+	height: 100%;
+    width: 60rem;
+}
+
+#h-container-stars {
+	position: absolute;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	transition: 0.5s;
+	backdrop-filter: blur(1rem);
+	border-radius: 0.5rem;
+}
+
+
+
+#h-stars {
+	position: relative;
+	background: transparent;
+	width: 200rem;
+	height: 200rem;
+}
+
+#h-stars::after {
+	content: "";
+	position: absolute;
+	top: -50rem;
+	left: -100rem;
+	width: 100%;
+	height: 100%;
+	animation: animStarRotate 90s linear infinite;
+}
+
+#h-stars::after {
+	background-image: radial-gradient(#ffffff 1px, transparent 1%);
+	background-size: 50px 50px;
+}
+
+#h-stars::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -50%;
+	width: 170%;
+	height: 500%;
+	animation: animStar 60s linear infinite;
+}
+
+#h-stars::before {
+	background-image: radial-gradient(#ffffff 1px, transparent 1%);
+	background-size: 70px 60px;
+	opacity: 0.5;
+}
+
+
+
+
+
+
 
 h2 {
 	margin: 0;
