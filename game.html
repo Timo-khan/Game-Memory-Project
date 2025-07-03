@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="x-UA-compatible" content="ie=edge">
-    <link rel="stylesheet" href="game.css">
-    <title>Memory Game</title>
-</head>
-<body>
-    <div class="pageContainer">
-        <h2 class="game-text"><span>"Memory</span> <span>Game"</span></h2>
-        <div class="gameGrid"></div>
-        <div id="timer">Time: 0s</div>
-        <div id="flip-counter">Flips: 0</div>
-        <button id="button"><span>~Reset~</span></button>
-        <script src="game.js"></script>
-    </div>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="x-UA-compatible" content="ie=edge" />
+		<link rel="stylesheet" href="game.css" />
+		<title>Memory Game</title>
+	</head>
+	<body>
+		<div class="pageContainer">
+			<h2 class="game-text"><span>"Memory</span> <span>Game"</span></h2>
+			<div class="gameGrid"></div>
+			<div id="timer">Time: 0s</div>
+			<div id="flip-counter">Flips: 0</div>
+			<button type="button" id="button">
+				<strong>Try Again</strong>
+				<div id="container-stars">
+					<div id="stars"></div>
+				</div>
+
+				<div id="glow">
+					<div class="circle"></div>
+					<div class="circle"></div>
+				</div>
+			</button>
+			<script src="game.js"></script>
+		</div>
+	</body>
 </html>
