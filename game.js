@@ -35,11 +35,19 @@ function initiateBoard() {
         cardWrapper.classList.add("memory-card");
         cardWrapper.setAttribute("data-id", i);
 
-        let card = document.createElement("img");
-        card.setAttribute("src", "images/card-backside.jpg");
-        card.setAttribute("data-id", i);
-        card.addEventListener("click", flipCard);
-        grid.appendChild(card);
+        const frontFace = document.createElement("img");
+        frontFace.classList.add("front-face");
+        frontFace.setAttribute("src", "images/" + cardsList[i]);
+
+        const backFace = document.createElement("img");
+        backFace.classList.add("back-face");
+        backFace.setAttribute("src", "images/card-backside.jpg");
+
+        cardWrapper.appendChild(frontFace);
+        cardWrapper.appendChild(backFace);
+        cardWrapper.addEventListener("click", flipCard);
+
+        grid.appendChild(cardWrapper);
     }
 }
 
