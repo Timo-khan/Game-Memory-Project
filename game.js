@@ -101,8 +101,8 @@ function checkForMatch() {
     if (chosenCards[0] === chosenCards[1]) {
         foundCards++;
         setTimeout(() => {
-        firstCard.style.visibility = "hidden";
-            secondCard.style.visibility = "hidden";
+        firstCard.remove();
+        secondCard.remove();
         }, 300);
     } else {
         setTimeout(() => {
