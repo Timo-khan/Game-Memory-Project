@@ -31,6 +31,10 @@ const timerDisplay = document.getElementById("timer");
 
 function initiateBoard() {
     for (let i = 0; i < cardsList.length; i++) {
+        const cardWrapper = document.createElement("div");
+        cardWrapper.classList.add("memory-card");
+        cardWrapper.setAttribute("data-id", i);
+
         let card = document.createElement("img");
         card.setAttribute("src", "images/card-backside.jpg");
         card.setAttribute("data-id", i);
