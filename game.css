@@ -9,19 +9,44 @@ body {
 	padding: 1rem;
 	background-color: rgba(248, 246, 246, 0.082);
 	box-sizing: border-box;
-	box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-		rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-		rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.game-text-cont,
+.m-stars {
+	width: 100%;
+	max-width: 100%;
+}
+
+#videoContainer {
+	position: static;
+	margin-top: -190px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#secondVidContainer {
+	position: static;
+	margin-top: -50px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#myVideo {
+	margin-top: -100px;
+}
+
+#secondVideo {
+	width: 70px;
 }
 
 #timer {
-	color: rgb(255, 0, 0);
-	display: flex;
-	justify-content: flex-end;
+	color: white;
 }
 
 #flip-counter {
-	color: rgb(255, 0, 0);
+	color: wheat;
 	display: flex;
 	justify-content: flex-end;
 }
@@ -30,7 +55,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	width: 100%;
+	width: 80%;
 	max-width: 765px;
 	margin: 0 auto;
 	border: none;
@@ -83,15 +108,15 @@ body {
 }
 
 .game-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Luckiest Guy", cursive;
-    margin-bottom: 2%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: "Luckiest Guy", cursive;
+	margin-bottom: 2%;
 }
 
 .game-text-cont {
-    background-image: linear-gradient(#212121, #212121),
+	background-image: linear-gradient(#212121, #212121),
 		linear-gradient(
 			137.48deg,
 			#ffdb3b 10%,
@@ -99,19 +124,19 @@ body {
 			#8f51ea 67%,
 			#0044ff 87%
 		);
-	
-    backdrop-filter: blur(1rem);
+
+	backdrop-filter: blur(1rem);
 	border-radius: 0.5rem;
 	animation: gradient_301 5s ease infinite;
 	border: double 4px transparent;
-    cursor: pointer;
+	cursor: pointer;
 	height: 100%;
-    width: 60rem;
+	width: 60rem;
 }
 
 .m-stars {
 	height: 100%;
-    width: 60rem;
+	width: 60rem;
 }
 
 #h-container-stars {
@@ -124,8 +149,6 @@ body {
 	backdrop-filter: blur(1rem);
 	border-radius: 0.5rem;
 }
-
-
 
 #h-stars {
 	position: relative;
@@ -164,12 +187,6 @@ body {
 	background-size: 70px 60px;
 	opacity: 0.5;
 }
-
-
-
-
-
-
 
 h2 {
 	margin: 0;
@@ -219,9 +236,9 @@ h2 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 11rem;
+	width: 7.5rem;
 	overflow: hidden;
-	height: 3rem;
+	height: 2rem;
 	background-size: 300% 300%;
 	cursor: pointer;
 	backdrop-filter: blur(1rem);
@@ -411,3 +428,151 @@ strong {
 		transform: scale(1) rotateZ(-3deg);
 	}
 }
+
+#timer,
+#flip-counter {
+	font-size: 1rem;
+	margin: 0.5rem;
+}
+
+@media (max-width: 768px) {
+	.memory-card {
+		width: 30%;
+	}
+
+	h2 {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.memory-card {
+		width: 45%;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+	}
+
+	#button {
+		width: 100%;
+		font-size: 1.2rem;
+	}
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 768px) {
+	h2 {
+		font-size: 1.8rem;
+		text-align: center;
+	}
+}
+
+@media (max-width: 868px) {
+	#myVideo {
+		width: 100px;
+	}
+
+	#secondVideo {
+		width: 50px;
+	}
+
+	#button {
+		width: 100%;
+		height: auto;
+		font-size: 1.2rem;
+	}
+}
+
+.game-note {
+	position: absolute;
+	top: 150px;
+	left: 20px;
+	width: 200px;
+	background-color: #212121bb;
+	color: #fff;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	text-align: center;
+	z-index: 10;
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 1200px) {
+	.game-note {
+		width: 150px;
+		text-align: center;
+	}
+}
+
+@media (max-width: 1000px) {
+	.game-note {
+display: none;
+	}
+}
+
+@media (max-width: 768px) {
+.pageContainer {
+	height: 100%;
+	}
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+	.pageContainer {
+		
+		width: 100%;
+	}
+
+	.memory-card {
+		width: 30%;
+		max-width: unset;
+		flex: 1 1 30%;
+	}
+
+	h2 {
+		font-size: 2rem;
+		text-align: center;
+	}
+
+	#button {
+		width: 90%;
+		margin: 1rem auto;
+		font-size: 1rem;
+	}
+
+	#timer,
+	#flip-counter {
+		font-size: 1rem;
+		text-align: center;
+		justify-content: center;
+	}
+
+	.gameGrid {
+		width: 70%;
+		padding: 0.5rem;
+		gap: 6px;
+	}
+
+	#myVideo,
+	#secondVideo {
+		width: 60px;
+		margin-top: 0;
+	}
+
+
+	.game-text-cont,
+	.m-stars {
+		width: 100%;
+	}
+}
+

@@ -29,6 +29,7 @@ let startTime = null;
 let timerInterval = null;
 const timerDisplay = document.getElementById("timer");
 
+
 function initiateBoard() {
     for (let i = 0; i < cardsList.length; i++) {
         const cardWrapper = document.createElement("div");
