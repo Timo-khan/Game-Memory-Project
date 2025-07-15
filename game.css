@@ -9,6 +9,7 @@ body {
 	padding: 1rem;
 	background-color: rgba(248, 246, 246, 0.082);
 	box-sizing: border-box;
+	box-shadow: 0 0 10px rgb(255, 255, 255);
 }
 
 .game-text-cont,
@@ -59,13 +60,12 @@ body {
 	max-width: 765px;
 	margin: 0 auto;
 	border: none;
-	box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-		rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-		rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.87);
 	background-color: rgb(206, 200, 200);
 	border-radius: 20px;
 	gap: 10px;
 	padding: 10px;
+	box-shadow: 0 0 20px rgb(227, 227, 11);
 }
 
 .memory-card {
@@ -89,6 +89,7 @@ body {
 	top: 0;
 	left: 0;
 	transition: transform 0.6s;
+	box-shadow: 0 0 5px rgb(227, 227, 11);
 }
 
 .front-face {
@@ -504,8 +505,29 @@ html {
 	border-radius: 0.5rem;
 	text-align: center;
 	z-index: 10;
-	box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+	box-shadow: 0 0 10px rgba(227, 227, 11, 0.87);
 }
+
+.game-note {
+	animation: changeColor 7s infinite;;
+}
+@keyframes changeColor {
+	0% { color: red; }
+	33% { color: green; }
+	66% { color: blue;}
+	88% { color: pink; }
+	100% { color: yellow; }
+}
+
+
+.again {
+	animation: changeColorAgain 7s infinite;;
+}
+@keyframes changeColorAgain {
+	0% { color: red; }
+	100% { color: yellow; }
+}
+
 
 @media (max-width: 1200px) {
 	.game-note {
