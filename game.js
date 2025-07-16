@@ -1,16 +1,13 @@
 async function fetchCards() {
-    return new Promise((resolve) => {
-        setTimeout (() => {
-            const images = [
-                'bird2.jpg', 'bird2.jpg', 'cat.jpg', 'cat.jpg',
-                'parrot.jpg', 'parrot.jpg', 'ostrich.avif', 'ostrich.avif',
-                'squirrel.jpg', 'squirrel.jpg', 'turtle.jpg', 'turtle.jpg'
-            ];
-
-            const randomized = images.sort(() => 0.5 - Math.random());
-            resolve(randomized);
-        }, 500);
-    });
+	try {
+		const response = await fetch("http://localhost:3000/api/cards");
+		if (!response.ok) throw new Error("Network response was not ok");
+		const cards = await response.json();
+		return cards;
+	} catch (error) {
+		console.error("Error fetching cards:", error);
+		return [];
+	}
 }
 
 const grid = document.querySelector(".gameGrid");
@@ -38,11 +35,17 @@ function initiateBoard() {
 
         const frontFace = document.createElement("img");
         frontFace.classList.add("front-face");
-        frontFace.setAttribute("src", "images/" + cardsList[i]);
+        frontFace.setAttribute(
+			"src",
+			`http://localhost:3000/images/${cardsList[i]}`
+		);
 
         const backFace = document.createElement("img");
         backFace.classList.add("back-face");
-        backFace.setAttribute("src", "images/card-backside.jpg");
+        backFace.setAttribute(
+			"src",
+			"http://localhost:3000/images/card-backside.jpg"
+		);
 
         cardWrapper.appendChild(frontFace);
         cardWrapper.appendChild(backFace);
