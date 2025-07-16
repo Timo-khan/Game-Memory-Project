@@ -1,13 +1,18 @@
-async function fetchCards() {
-	try {
-		const response = await fetch("http://localhost:3000/api/cards");
-		if (!response.ok) throw new Error("Network response was not ok");
-		const cards = await response.json();
-		return cards;
-	} catch (error) {
-		console.error("Error fetching cards:", error);
-		return [];
-	}
+function fetchCards() {
+	return fetch("http://localhost:3000/api/cards")
+		.then(response => {
+			if (!response.ok) {
+				throw new Error("Network response was not ok");
+			}
+			return response.json();
+		})
+		.then(cards => {
+			return cards;
+		})
+		.catch(error => {
+			console.error("Error fetching cards:", error);
+			return [];
+		});
 }
 
 const grid = document.querySelector(".gameGrid");
