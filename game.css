@@ -56,7 +56,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	width: 80%;
+	width: auto;
 	max-width: 765px;
 	margin: 0 auto;
 	border: none;
@@ -69,13 +69,13 @@ body {
 }
 
 .memory-card {
-	width: 22%;
+	width: 150px;
 	aspect-ratio: 1 / 1;
 	perspective: 1000px;
 	position: relative;
 	cursor: pointer;
-	flex: 1 1 22%;
-	max-width: 160px;
+	flex: 0 0 auto;
+	max-width: 170px;
 }
 
 .memory-card img {
@@ -438,7 +438,9 @@ strong {
 
 @media (max-width: 768px) {
 	.memory-card {
-		width: 30%;
+		width: 100px;
+		max-width: 170px;
+		flex: 0 0 auto;
 	}
 
 	h2 {
@@ -448,7 +450,9 @@ strong {
 
 @media (max-width: 480px) {
 	.memory-card {
-		width: 45%;
+		width: 100px;
+		max-width: 100px;
+		flex: 0 0 auto;
 	}
 
 	h2 {
@@ -548,17 +552,11 @@ display: none;
 	}
 }
 
-/* Mobile-specific improvements */
+
 @media (max-width: 768px) {
 	.pageContainer {
 		
 		width: 100%;
-	}
-
-	.memory-card {
-		width: 30%;
-		max-width: unset;
-		flex: 1 1 30%;
 	}
 
 	h2 {
@@ -579,8 +577,26 @@ display: none;
 		justify-content: center;
 	}
 
+	#videoContainer {
+	position: static;
+	margin-top: -225px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	}
+
+	#secondVidContainer {
+	position: static;
+	margin-top: 10px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	}
+
+
 	.gameGrid {
-		width: 70%;
+		width: auto;
+		justify-content: center;
 		padding: 0.5rem;
 		gap: 6px;
 	}
