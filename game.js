@@ -1,38 +1,62 @@
-async function fetchCards() {
-    return new Promise((resolve) => {
-        setTimeout (() => {
-            const images = [
-                'bird2.jpg', 'bird2.jpg', 'cat.jpg', 'cat.jpg',
-                'parrot.jpg', 'parrot.jpg', 'ostrich.avif', 'ostrich.avif',
-                'squirrel.jpg', 'squirrel.jpg', 'turtle.jpg', 'turtle.jpg'
-            ];
-
-            const randomized = images.sort(() => 0.5 - Math.random());
-            resolve(randomized);
-        }, 500)
-    });
+function fetchCards() {
+	return fetch("http://localhost:3000/api/cards")
+		.then(response => {
+			if (!response.ok) {
+				throw new Error("Network response was not ok");
+			}
+			return response.json();
+		})
+		.then(cards => {
+			return cards;
+		})
+		.catch(error => {
+			console.error("Error fetching cards:", error);
+			return [];
+		});
 }
 
 const grid = document.querySelector(".gameGrid");
+const flipCounterDisplay = document.getElementById("flip-counter");
 const cardsInGame = 6;
 let cardsList = [];
 let attempts = 0;
 let foundCards = 0;
+let cardFlipCount = 0;
 
 let chosenCards = [];
 let chosenCardsIds = [];
+let isChecking = false;
 
 let startTime = null;
 let timerInterval = null;
 const timerDisplay = document.getElementById("timer");
 
+
 function initiateBoard() {
     for (let i = 0; i < cardsList.length; i++) {
-        let card = document.createElement("img");
-        card.setAttribute("src", "images/card-backside.jpg");
-        card.setAttribute("data-id", i);
-        card.addEventListener("click", flipCard);
-        grid.appendChild(card);
+        const cardWrapper = document.createElement("div");
+        cardWrapper.classList.add("memory-card");
+        cardWrapper.setAttribute("data-id", i);
+
+        const frontFace = document.createElement("img");
+        frontFace.classList.add("front-face");
+        frontFace.setAttribute(
+			"src",
+			`http://localhost:3000/images/${cardsList[i]}`
+		);
+
+        const backFace = document.createElement("img");
+        backFace.classList.add("back-face");
+        backFace.setAttribute(
+			"src",
+			"http://localhost:3000/images/card-backside.jpg"
+		);
+
+        cardWrapper.appendChild(frontFace);
+        cardWrapper.appendChild(backFace);
+        cardWrapper.addEventListener("click", flipCard);
+
+        grid.appendChild(cardWrapper);
     }
 }
 
@@ -49,39 +73,51 @@ function stopTimer() {
 }
 
 function flipCard() {
-    if (chosenCards.length === 2) return;
+    if (isChecking || this.classList.contains("flipped") || chosenCards.length === 2) return;
+
+    const cardId = parseInt(this.getAttribute("data-id"));
+
+    if (!chosenCardsIds.includes(cardId)) {
+        this.classList.add("flipped");
+
+        chosenCards.push(cardsList[cardId]);
+        chosenCardsIds.push(cardId);
+        cardFlipCount++;
+        flipCounterDisplay.textContent = `Flips: ${cardFlipCount}`;
 
     if (!startTime) {
         startTimer();
     }
 
-    let cardId = this.getAttribute("data-id");
-    if (!chosenCardsIds.includes(cardId)) {
-        chosenCards.push(cardsList[cardId]);
-        chosenCardsIds.push(cardId);
-        this.setAttribute("src", "images/" + cardsList[cardId]);
-        let cardFlipCount = 0;
-        cardFlipCount++;
-        console.log("Card flipped. Total flips:", cardFlipCount);
-
         if (chosenCards.length === 2) {
-            setTimeout(checkForMatch, 500);
-        }
+            isChecking = true;
+            setTimeout(() => {
+                checkForMatch();
+                isChecking = false;
+            }, 600);
+        } 
     }
 }
 
 function checkForMatch() {
-    attempts++;
-    let cards = document.querySelectorAll("img");
-    const [firstId, secondId] = chosenCardsIds;
+    const firstId = chosenCardsIds[0];
+    const secondId = chosenCardsIds[1];
+
+    const firstCard = document.querySelector(`.memory-card[data-id='${firstId}']`);
+    const secondCard = document.querySelector(`.memory-card[data-id='${secondId}']`);
+    
 
     if (chosenCards[0] === chosenCards[1]) {
         foundCards++;
-        cards[firstId].removeEventListener("click", flipCard);
-        cards[secondId].removeEventListener("click", flipCard);
+        setTimeout(() => {
+        firstCard.remove();
+        secondCard.remove();
+        }, 300);
     } else {
-        cards[firstId].setAttribute("src", "images/card-backside.jpg");
-        cards[secondId].setAttribute("src", "images/card-backside.jpg");
+        setTimeout(() => {
+            firstCard.classList.remove("flipped");
+            secondCard.classList.remove("flipped");
+        }, 300);
     }
 
     chosenCards = [];
@@ -96,6 +132,7 @@ function checkForMatch() {
     }
 }
 
+
     (async function() {
         try {
             const cards = await fetchCards();
@@ -108,6 +145,8 @@ function checkForMatch() {
 
     async function resetGame() {
         grid.innerHTML = '';
+        cardFlipCount = 0;
+        flipCounterDisplay.textContent = "Flips: 0";
         attempts = 0;
         foundCards = 0;
         chosenCards = [];

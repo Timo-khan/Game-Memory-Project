@@ -1,19 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="x-UA-compatible" content="ie=edge">
-    <link rel="stylesheet" href="game.css">
-    <title>Memory Game</title>
-</head>
-<body>
-    <div class="pageContainer">
-        <h2 class="game-text"><span>"Memory</span> <span>Game"</span></h2>
-        <div class="gameGrid"></div>
-        <div id="timer">Time: 0s</div>
-        <button id="button"><span>~Reset~</span></button>
-        <script src="game.js"></script>
-    </div>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-compatible" content="IE=edge" />
+		<link rel="stylesheet" href="game.css" />
+		<title>Memory Game</title>
+	</head>
+	<body>
+		<div class="pageContainer">
+			<div class="game-note">
+    <h4>Memory Game Instructions</h4>
+    <p>Flip the cards to find
+        matching pairs. Try to
+        remember the position
+        of each card, The timer🕒 
+		tracks how long you play. Click
+        <strong class="again">~Try Again~</strong> to start 
+		a new round. Good luck, and train your brain!
+	</p>
+	</div>
+			<div class="game-text-cont">
+				<div class="m-stars">
+					<div id="h-container-stars">
+						<div id="h-stars"></div>
+					</div>
+					<h2 class="game-text"><span>"Memory</span> <span>Game"</span></h2>
+				</div>
+			</div>
+			<div class="gameGrid"></div>
+			<div id="secondVidContainer">
+				<video
+					id="secondVideo"
+					class="video"
+					src="videos/Animation - 1748647429211.webm"
+					autoplay
+					loop
+					muted
+				></video>
+			</div>
+			<div id="timer">Time: 0s</div>
+			<div id="flip-counter">Flips: 0</div>
+			<button type="button" id="button">
+				<strong>Try Again</strong>
+				<div id="container-stars">
+					<div id="stars"></div>
+				</div>
+
+				<div id="glow">
+					<div class="circle"></div>
+					<div class="circle"></div>
+				</div>
+			</button>
+			<script src="game.js"></script>
+		</div>
+		<div id="videoContainer">
+			<video
+				id="myVideo"
+				class="video"
+				src="videos/Animation - 1748603122927.webm"
+				autoplay
+				loop
+				muted
+			></video>
+		</div>
+	</body>
 </html>
